@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Permission;
+use App\Models\Role;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -15,9 +17,19 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name'  => 'Test User',
-            'email' => 'test@example.com',
+        $admin = User::factory()->create([
+            'name'  => 'admin',
+            'email' => 'admin@eduspark.com',
+        ]);
+
+        $roles = Role::factory()->createMany([
+            ['name' => 'admin'],
+            ['name' => 'user'],
+        ]);
+
+        $permissions = Permission::factory()->createMany([
+            ['name' => 'read'],
+            ['name' => 'write'],
         ]);
     }
 }
